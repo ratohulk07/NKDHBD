@@ -1217,7 +1217,7 @@ const notes = [
   "Your smile",
   "Your gaze",
   "Just you",
-  "Our first kiss",
+  "The way you kiss",
   "The way you care",
   "Your random voice notes",
   "The way you get competitive",
@@ -1245,9 +1245,19 @@ function popNote(e) {
     setTimeout(() => s.remove(), 1200);
   }
 
+  let remainingNotes = [...notes];
+
+function getNextNote() {
+  if (remainingNotes.length === 0) {
+    remainingNotes = [...notes];
+  }
+
+  const randomIndex = Math.floor(Math.random() * remainingNotes.length);
+  return remainingNotes.splice(randomIndex, 1)[0];
+}
   const note = document.createElement('div');
   note.className = 'sticky-note';
-  note.textContent = notes[Math.floor(Math.random() * notes.length)];
+  note.textContent = getNextNote();
   const rot = (Math.random() - 0.5) * 10;
   note.style.setProperty('--rot', 'rotate(' + rot + 'deg)');
   note.style.transform = 'rotate(' + rot + 'deg)';
